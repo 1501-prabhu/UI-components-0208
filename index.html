@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI Components Showcase</title>
+    <style>
+        :root {
+            --primaryColor: #14476c;
+            --secondaryColor: #37c2f1;
+            --lightBlue: #e8f4fd;
+            --darkBlue: #0f3a57;
+            --textColor: #333;
+            --lightGray: #f8f9fa;
+            --borderColor: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--textColor);
+            background: linear-gradient(135deg, var(--primaryColor) 0%, var(--secondaryColor) 100%);
+            min-height: 100vh;
+        }
+
+        /* Main Navbar */
+        .main-navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primaryColor);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--textColor);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondaryColor);
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+            top: 100%;
+            left: 0;
+            z-index: 1001;
+            border: 1px solid var(--borderColor);
+        }
+
+        .dropdown-content a {
+            padding: 12px 20px;
+            display: block;
+            border-radius: 8px;
+            margin: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background: var(--lightBlue);
+            color: var(--primaryColor);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem;
+            color: white;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            background: white;
+            border-radius: 25px 25px 0 0;
+            box-shadow: 0 -15px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Component Sections */
+        .component-section {
+            margin: 4rem 0;
+            padding: 3rem;
+            background: var(--lightBlue);
+            border-radius: 20px;
+            border-left: 6px solid var(--primaryColor);
+        }
+
+        .component-title {
+            font-size: 2.2rem;
+            color: var(--primaryColor);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .component-description {
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* Labels */
+        .primary-label {
+            background: var(--primaryColor);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-left: auto;
+        }
+
+        .secondary-label {
+            background: var(--secondaryColor);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-left: auto;
+        }
+
+        /* Example Container */
+        .example-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primaryColor);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--darkBlue);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(20, 71, 108, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--secondaryColor);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #2ba8d4;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(55, 194, 241, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .component-section {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Main Navigation -->
+    <!-- <nav class="main-navbar">
+        <div class="nav-container">
+            <div class="logo">🎨 UI Showcase</div>
+            <ul class="nav-links">
+                <li><a href="#primary">Primary</a></li>
+                <li><a href="#secondary">Secondary</a></li>
+                <li class="dropdown">
+                    <a href="#resources">Resources ↓</a>
+                    <div class="dropdown-content">
+                        <a href="#tutorials">📚 Tutorials</a>
+                        <a href="#examples">💡 Examples</a>
+                        <a href="#templates">🎨 Templates</a>
+                        <a href="#documentation">📖 Documentation</a>
+                    </div>
+                </li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav> -->
+
+    <!-- Hero Section -->
+    <!-- <section class="hero">
+        <h1>UI Components Showcase</h1>
+        <p>Interactive examples of essential user interface components for modern web development</p>
+    </section> -->
+
+    <div class="container">
+        <!-- PRIMARY COMPONENTS -->
+
+        <!-- 1. Navbar with Dropdown -->
+        <section class="component-section" id="primary">
+            <div style="display: flex; align-items: center; margin-bottom: 2rem;">
+                <h2 class="component-title"> 1. Navbar with Dropdown Menus</h2>
+                <span class="primary-label">PRIMARY</span>
+            </div>
+            <p class="component-description">
+                Navigation bars provide users with easy access to different sections of a website. Dropdown menus extend
+                this functionality by organizing related links in expandable submenus.
+            </p>
+
+            <div class="example-container">
+                <nav style="background: var(--primaryColor); padding: 1.5rem 2rem; border-radius: 12px; color: white;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="font-weight: bold; font-size: 1.4rem;">🏢 TechCorp</div>
+                        <div style="display: flex; gap: 2.5rem; align-items: center;">
+                            <a href="#"
+                                style="color: white; text-decoration: none; transition: color 0.3s; padding: 0.5rem 1rem; border-radius: 6px;"
+                                onmouseover="this.style.color='var(--secondaryColor)'; this.style.background='rgba(255,255,255,0.1)'"
+                                onmouseout="this.style.color='white'; this.style.background='transparent'">Home</a>
+
+                            <div style="position: relative; display: inline-block;">
+                                <a href="#"
+                                    style="color: white; text-decoration: none; transition: all 0.3s; padding: 0.5rem 1rem; border-radius: 6px; display: flex; align-items: center; gap: 0.5rem;"
+                                    onmouseover="showNavDropdown('services-dropdown'); this.style.color='var(--secondaryColor)'; this.style.background='rgba(255,255,255,0.1)'"
+                                    onmouseout="this.style.color='white'; this.style.background='transparent'">
+                                    Services
+                                    <span style="font-size: 0.8rem;">▼</span>
+                                </a>
+                                <div id="services-dropdown"
+                                    style="display: none; position: absolute; background: white; min-width: 220px; box-shadow: 0 12px 24px rgba(0,0,0,0.15); border-radius: 12px; top: 100%; left: 0; z-index: 100; margin-top: 0.5rem;"
+                                    onmouseover="showNavDropdown('services-dropdown')"
+                                    onmouseleave="hideNavDropdown('services-dropdown')">
+                                    <a href="#"
+                                        style="display: block; padding: 15px 20px; text-decoration: none; color: var(--textColor); transition: all 0.3s; border-radius: 8px; margin: 8px;"
+                                        onmouseover="this.style.background='var(--lightBlue)'; this.style.transform='translateX(5px)'"
+                                        onmouseout="this.style.background='white'; this.style.transform='translateX(0)'">
+                                        <strong>💼 Web Development</strong><br>
+                                        <small style="color: #666;">Custom websites & apps</small>
+                                    </a>
+                                    <a href="#"
+                                        style="display: block; padding: 15px 20px; text-decoration: none; color: var(--textColor); transition: all 0.3s; border-radius: 8px; margin: 8px;"
+                                        onmouseover="this.style.background='var(--lightBlue)'; this.style.transform='translateX(5px)'"
+                                        onmouseout="this.style.background='white'; this.style.transform='translateX(0)'">
+                                        <strong>🎨 UI/UX Design</strong><br>
+                                        <small style="color: #666;">User-centered design</small>
+                                    </a>
+                                    <a href="#"
+                                        style="display: block; padding: 15px 20px; text-decoration: none; color: var(--textColor); transition: all 0.3s; border-radius: 8px; margin: 8px;"
+                                        onmouseover="this.style.background='var(--lightBlue)'; this.style.transform='translateX(5px)'"
+                                        onmouseout="this.style.background='white'; this.style.transform='translateX(0)'">
+                                        <strong>📱 Mobile Apps</strong><br>
+                                        <small style="color: #666;">iOS & Android development</small>
+                                    </a>
+                                    <a href="#"
+                                        style="display: block; padding: 15px 20px; text-decoration: none; color: var(--textColor); transition: all 0.3s; border-radius: 8px; margin: 8px; border-top: 1px solid var(--borderColor);"
+                                        onmouseover="this.style.background='var(--lightBlue)'; this.style.transform='translateX(5px)'"
+                                        onmouseout="this.style.background='white'; this.style.transform='translateX(0)'">
+                                        <strong>🚀 Consulting</strong><br>
+                                        <small style="color: #666;">Strategic guidance</small>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <a href="#"
+                                style="color: white; text-decoration: none; transition: color 0.3s; padding: 0.5rem 1rem; border-radius: 6px;"
+                                onmouseover="this.style.color='var(--secondaryColor)'; this.style.background='rgba(255,255,255,0.1)'"
+                                onmouseout="this.style.color='white'; this.style.background='transparent'">Portfolio</a>
+                            <a href="#"
+                                style="color: white; text-decoration: none; transition: color 0.3s; padding: 0.5rem 1rem; border-radius: 6px;"
+                                onmouseover="this.style.color='var(--secondaryColor)'; this.style.background='rgba(255,255,255,0.1)'"
+                                onmouseout="this.style.color='white'; this.style.background='transparent'">About</a>
+                            <a href="#"
+                                style="color: white; text-decoration: none; transition: color 0.3s; padding: 0.5rem 1rem; border-radius: 6px;"
+                                onmouseover="this.style.color='var(--secondaryColor)'; this.style.background='rgba(255,255,255,0.1)'"
+                                onmouseout="this.style.color='white'; this.style.background='transparent'">Contact</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </section>
+
+        <!-- 2. Hero Section -->
+        <section class="component-section">
+            <div style="display: flex; align-items: center; margin-bottom: 2rem;">
+                <h2 class="component-title"> 2. Hero Section</h2>
+                <span class="primary-label">PRIMARY</span>
+            </div>
+            <p class="component-description">
+                Hero sections are the first thing visitors see on your website. They should immediately communicate your
+                value proposition and encourage users to take action.
+            </p>
+
+            <div class="example-container">
+                <div
+                    style="background: linear-gradient(135deg, var(--primaryColor), var(--secondaryColor)); color: white; text-align: center; padding: 4rem 2rem; border-radius: 15px;">
+                    <h2 style="font-size: 3rem; margin-bottom: 1rem;">Build Better Products</h2>
+                    <p
+                        style="font-size: 1.3rem; margin-bottom: 2.5rem; opacity: 0.9; max-width: 500px; margin-left: auto; margin-right: auto;">
+                        Transform your ideas into powerful digital solutions that users love and businesses need.</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <button class="btn btn-secondary" style="font-size: 1.1rem; padding: 1.2rem 2.5rem;">Get Started
+                            Free</button>
+                        <button
+                            style="background: transparent; color: white; border: 2px solid white; padding: 1.2rem 2.5rem; border-radius: 8px; font-size: 1.1rem; cursor: pointer; transition: all 0.3s;"
+                            onmouseover="this.style.background='white'; this.style.color='var(--primaryColor)'"
+                            onmouseout="this.style.background='transparent'; this.style.color='white'">Watch
+                            Demo</button>
+                    </div>
+                    <div style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8;">✅ No credit card required • ✅ 14-day
+                        free trial</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Cards -->
+        <section class="component-section">
+            <div style="display: flex; align-items: center; margin-bottom: 2rem;">
+                <h2 class="component-title"> 3. Cards</h2>
+                <span class="primary-label">PRIMARY</span>
+            </div>
+            <p class="component-description">
+                Cards are versatile containers that organize information into digestible chunks. They're perfect for
+                displaying products, features, team members, and content previews.
+            </p>
+
+            <div class="example-container">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                    <div style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.1); transition: all 0.3s; border-top: 4px solid var(--primaryColor);"
+                        onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.15)'"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'">
+                        <div
+                            style="height: 180px; background: linear-gradient(45deg, var(--primaryColor), var(--secondaryColor)); display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem;">
+                            💻</div>
+                        <div style="padding: 1.5rem;">
+                            <h4 style="color: var(--primaryColor); margin-bottom: 0.5rem; font-size: 1.3rem;">Web
+                                Development</h4>
+                            <p style="color: #666; margin-bottom: 1.5rem; font-size: 0.95rem;">Build responsive, modern
+                                websites with cutting-edge technologies and best practices for optimal performance.</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="color: var(--secondaryColor); font-weight: 600;">Starting at $2,499</span>
+                                <button
+                                    style="background: var(--primaryColor); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; cursor: pointer; transition: background 0.3s;"
+                                    onmouseover="this.style.background='var(--darkBlue)'"
+                                    onmouseout="this.style.background='var(--primaryColor)'">Learn More</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.1); transition: all 0.3s; border-top: 4px solid var(--secondaryColor);"
+                        onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.15)'"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'">
+                        <div
+                            style="height: 180px; background: linear-gradient(45deg, var(--secondaryColor), #64b5f6); display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem;">
+                            🎨</div>
+                        <div style="padding: 1.5rem;">
+                            <h4 style="color: var(--primaryColor); margin-bottom: 0.5rem; font-size: 1.3rem;">UI/UX
+                                Design</h4>
+                            <p style="color: #666; margin-bottom: 1.5rem; font-size: 0.95rem;">Create beautiful,
+                                intuitive user interfaces that provide exceptional user experiences and drive
+                                engagement.</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="color: var(--secondaryColor); font-weight: 600;">Starting at $1,999</span>
+                                <button
+                                    style="background: var(--secondaryColor); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; cursor: pointer; transition: background 0.3s;"
+                                    onmouseover="this.style.background='#2ba8d4'"
+                                    onmouseout="this.style.background='var(--secondaryColor)'">Learn More</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.1); transition: all 0.3s; border-top: 4px solid var(--primaryColor);"
+                        onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.15)'"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'">
+                        <div
+                            style="height: 180px; background: linear-gradient(45deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem;">
+                            📱</div>
+                        <div style="padding: 1.5rem;">
+                            <h4 style="color: var(--primaryColor); margin-bottom: 0.5rem; font-size: 1.3rem;">Mobile
+                                Development</h4>
+                            <p style="color: #666; margin-bottom: 1.5rem; font-size: 0.95rem;">Native and cross-platform
+                                mobile applications for iOS and Android with seamless performance.</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="color: var(--secondaryColor); font-weight: 600;">Starting at $3,499</span>
+                                <button
+                                    style="background: var(--primaryColor); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; cursor: pointer; transition: background 0.3s;"
+                                    onmouseover="this.style.background='var(--darkBlue)'"
+                                    onmouseout="this.style.background='var(--primaryColor)'">Learn More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Forms -->
+        <section class="component-section">
+            <div style="display: flex; align-items: center; margin-bottom: 2rem;">
+                <h2 class="component-title"> 4. Forms</h2>
+                <span class="primary-label">PRIMARY</span>
+            </div>
+            <p class="component-description">
+                Forms allow users to submit information, such as contact details, feedback, or account registrations. A
+                well-designed form should be intuitive, accessible, and visually clear with proper labels and inputs.
+            </p>
+
+            <div class="example-container">
+                <form style="max-width: 500px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem;">
+
+                    <!-- Name -->
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <label for="name" style="font-weight: 600; color: var(--primaryColor);">Full Name</label>
+                        <input type="text" id="name" placeholder="Enter your full name"
+                            style="padding: 0.9rem 1rem; border: 1px solid var(--borderColor); border-radius: 8px; font-size: 1rem; transition: border 0.3s;"
+                            onfocus="this.style.border='1px solid var(--secondaryColor)'"
+                            onblur="this.style.border='1px solid var(--borderColor)'">
+                    </div>
+
+                    <!-- Email -->
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <label for="email" style="font-weight: 600; color: var(--primaryColor);">Email Address</label>
+                        <input type="email" id="email" placeholder="Enter your email"
+                            style="padding: 0.9rem 1rem; border: 1px solid var(--borderColor); border-radius: 8px; font-size: 1rem; transition: border 0.3s;"
+                            onfocus="this.style.border='1px solid var(--secondaryColor)'"
+                            onblur="this.style.border='1px solid var(--borderColor)'">
+                    </div>
+
+                    <!-- Message -->
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <label for="message" style="font-weight: 600; color: var(--primaryColor);">Message</label>
+                        <textarea id="message" rows="4" placeholder="Write your message here..."
+                            style="padding: 0.9rem 1rem; border: 1px solid var(--borderColor); border-radius: 8px; font-size: 1rem; transition: border 0.3s; resize: vertical;"
+                            onfocus="this.style.border='1px solid var(--secondaryColor)'"
+                            onblur="this.style.border='1px solid var(--borderColor)'"></textarea>
+                    </div>
+
+                    <!-- Checkbox -->
+                    <div style="display: flex; align-items: center; gap: 0.6rem;">
+                        <input type="checkbox" id="subscribe" style="transform: scale(1.2); cursor: pointer;">
+                        <label for="subscribe" style="color: #555; font-size: 0.95rem;">Subscribe to our
+                            newsletter</label>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div style="display: flex; gap: 1rem; justify-content: flex-end; flex-wrap: wrap;">
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- 5. Tables -->
+        <section class="component-section">
+            <div style="display: flex; align-items: center; margin-bottom: 2rem;">
+                <h2 class="component-title"> 5. Tables</h2>
+                <span class="primary-label">PRIMARY</span>
+            </div>
+            <p class="component-description">
+                Tables are used to display structured data in rows and columns. They should be clear, responsive, and
+                easy to scan. Proper use of headers and borders improves readability.
+            </p>
+
+            <div class="example-container">
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; min-width: 600px;">
+                        <!-- Table Head -->
+                        <thead>
+                            <tr style="background-color: var(--primaryColor); color: #fff; text-align: left;">
+                                <th style="padding: 1rem; font-weight: 600;">#</th>
+                                <th style="padding: 1rem; font-weight: 600;">Name</th>
+                                <th style="padding: 1rem; font-weight: 600;">Email</th>
+                                <th style="padding: 1rem; font-weight: 600;">Role</th>
+                                <th style="padding: 1rem; font-weight: 600;">Status</th>
+                            </tr>
+                        </thead>
+
+                        <!-- Table Body -->
+                        <tbody>
+                            <tr style="border-bottom: 1px solid var(--borderColor); transition: background 0.3s;"
+                                onmouseover="this.style.background='#f9f9f9'"
+                                onmouseout="this.style.background='transparent'">
+                                <td style="padding: 1rem;">1</td>
+                                <td style="padding: 1rem;">John Doe</td>
+                                <td style="padding: 1rem;">john@example.com</td>
+                                <td style="padding: 1rem;">Admin</td>
+                                <td style="padding: 1rem;"><span
+                                        style="background: #28a745; color: #fff; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">Active</span>
+                                </td>
+                            </tr>
+
+                            <tr style="border-bottom: 1px solid var(--borderColor); transition: background 0.3s;"
+                                onmouseover="this.style.background='#f9f9f9'"
+                                onmouseout="this.style.background='transparent'">
+                                <td style="padding: 1rem;">2</td>
+                                <td style="padding: 1rem;">Jane Smith</td>
+                                <td style="padding: 1rem;">jane@example.com</td>
+                                <td style="padding: 1rem;">Editor</td>
+                                <td style="padding: 1rem;"><span
+                                        style="background: #ffc107; color: #000; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">Pending</span>
+                                </td>
+                            </tr>
+
+                            <tr style="border-bottom: 1px solid var(--borderColor); transition: background 0.3s;"
+                                onmouseover="this.style.background='#f9f9f9'"
+                                onmouseout="this.style.background='transparent'">
+                                <td style="padding: 1rem;">3</td>
+                                <td style="padding: 1rem;">Mark Lee</td>
+                                <td style="padding: 1rem;">mark@example.com</td>
+                                <td style="padding: 1rem;">Viewer</td>
+                                <td style="padding: 1rem;"><span
+                                        style="background: #dc3545; color: #fff; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">Inactive</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. CRUD Table -->
+        <section class="component-section">
+            <div style="display: flex; align-items: center; margin-bottom: 2rem;">
+                <h2 class="component-title"> 6. CRUD Table</h2>
+                <span class="primary-label">PRIMARY</span>
+            </div>
+            <p class="component-description">
+                A CRUD table allows you to <b>Create</b>, <b>Read</b>, <b>Update</b>, and <b>Delete</b> records directly
+                within the UI. This is commonly used in admin dashboards.
+            </p>
+
+            <div class="example-container">
+                <div style="margin-bottom: 1rem;">
+                    <input type="text" id="nameInput" placeholder="Enter name"
+                        style="padding:0.5rem; border:1px solid var(--borderColor); border-radius:8px; margin-right:0.5rem;">
+                    <input type="email" id="emailInput" placeholder="Enter email"
+                        style="padding:0.5rem; border:1px solid var(--borderColor); border-radius:8px; margin-right:0.5rem;">
+                    <button onclick="addRow()" class="primary-button">Add</button>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table id="crudTable" style="width:100%; border-collapse: collapse; min-width: 600px;">
+                        <thead>
+                            <tr style="background-color: var(--primaryColor); color: #fff; text-align: left;">
+                                <th style="padding:1rem;">#</th>
+                                <th style="padding:1rem;">Name</th>
+                                <th style="padding:1rem;">Email</th>
+                                <th style="padding:1rem;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom:1px solid var(--borderColor);">
+                                <td style="padding:1rem;">1</td>
+                                <td style="padding:1rem;">John Doe</td>
+                                <td style="padding:1rem;">john@example.com</td>
+                                <td style="padding:1rem;">
+                                    <button onclick="editRow(this)"
+                                        style="background:#ffc107; color:#000; border:none; padding:0.4rem 0.8rem; border-radius:6px; cursor:pointer;">Edit</button>
+                                    <button onclick="deleteRow(this)"
+                                        style="background:#dc3545; color:#fff; border:none; padding:0.4rem 0.8rem; border-radius:6px; cursor:pointer;">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="component-section">
+            <div style="display: flex; align-items: center; margin-bottom: 2rem;">
+                <h2 class="component-title">7. Carousel / Slider</h2>
+                <span class="primary-label">PRIMARY</span>
+            </div>
+            <p class="component-description">
+                A carousel (or slider) lets users navigate through multiple items like images, testimonials, or
+                product cards. It improves user engagement by showcasing content in a compact and interactive way.
+            </p>
+
+            <div class="example-container" style="position:relative; overflow:hidden; max-width:800px; margin:auto;">
+                <div class="carousel-track" id="carouselTrack" style="display:flex; transition: transform 0.5s ease;">
+                    <!-- Slide 1 -->
+                    <div class="carousel-slide" style="min-width:100%; text-align:center;">
+                        <img src="https://picsum.photos/800/300?random=1" style="width:100%; border-radius:12px;">
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="carousel-slide" style="min-width:100%; text-align:center;">
+                        <img src="https://picsum.photos/800/300?random=2" style="width:100%; border-radius:12px;">
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="carousel-slide" style="min-width:100%; text-align:center;">
+                        <img src="https://picsum.photos/800/300?random=3" style="width:100%; border-radius:12px;">
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <button onclick="prevSlide()" style="position:absolute; top:50%; left:10px; transform:translateY(-50%);
+                   background:rgba(0,0,0,0.5); color:#fff; border:none; border-radius:50%;
+                   width:40px; height:40px; cursor:pointer;">❮</button>
+                <button onclick="nextSlide()" style="position:absolute; top:50%; right:10px; transform:translateY(-50%);
+                   background:rgba(0,0,0,0.5); color:#fff; border:none; border-radius:50%;
+                   width:40px; height:40px; cursor:pointer;">❯</button>
+            </div>
+        </section>
+
+        <script>
+            let currentSlide = 0;
+            const track = document.getElementById("carouselTrack");
+            const slides = document.querySelectorAll(".carousel-slide");
+            const totalSlides = slides.length;
+
+            function updateCarousel() {
+                track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateCarousel();
+            }
+
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                updateCarousel();
+            }
+
+            // Optional auto-slide every 4 seconds
+            setInterval(nextSlide, 4000);
+        </script>
+
+
+    </div>
+
+
+
+
+
+    <script src="./script.js"></script>
+</body>
+
+</html>
