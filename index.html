@@ -135,7 +135,7 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 3rem 2rem;
+            padding: 1  rem 2rem;
             background: white;
             border-radius: 25px 25px 0 0;
             box-shadow: 0 -15px 50px rgba(0, 0, 0, 0.1);
@@ -615,8 +615,19 @@
                         style="padding:0.5rem; border:1px solid var(--borderColor); border-radius:8px; margin-right:0.5rem;">
                     <input type="email" id="emailInput" placeholder="Enter email"
                         style="padding:0.5rem; border:1px solid var(--borderColor); border-radius:8px; margin-right:0.5rem;">
-                    <button onclick="addRow()" class="primary-button">Add</button>
+                    <button onclick="addRow()" style="padding:0.6rem 1rem; background:var(--primaryColor); color:#fff; 
+               border:none; border-radius:8px; cursor:pointer; transition:0.3s; font-weight:500;">
+                        Add
+                    </button>
                 </div>
+
+                <script>
+                    // Optional hover effect
+                    const btn = document.querySelector("button[onclick='addRow()']");
+                    btn.addEventListener("mouseover", () => btn.style.background = "#0d6efd");
+                    btn.addEventListener("mouseout", () => btn.style.background = "var(--primaryColor)");
+                </script>
+
 
                 <div style="overflow-x: auto;">
                     <table id="crudTable" style="width:100%; border-collapse: collapse; min-width: 600px;">
@@ -705,6 +716,175 @@
             // Optional auto-slide every 4 seconds
             setInterval(nextSlide, 4000);
         </script>
+
+
+
+
+        <section class="component-section">
+            <div style="display: flex; align-items: center; margin-bottom: 2rem;">
+                <h2 class="component-title">8. Accordion</h2>
+                <span class="secondary-label">SECONDARY</span>
+            </div>
+            <p class="component-description">
+                An accordion expands and collapses sections to show or hide content.
+                It helps organize large information into smaller, manageable parts.
+            </p>
+
+            <div class="example-container" style="max-width:600px; margin:auto;">
+                <!-- Accordion 1 -->
+                <button class="accordion-btn" onclick="toggleAccordion(this)" style="width:100%; text-align:left; padding:1rem; border:none; outline:none; 
+            background:var(--primaryColor); color:#fff; cursor:pointer; border-radius:8px; 
+            margin-bottom:0.5rem; display:flex; justify-content:space-between; align-items:center;">
+                    <span>What is HTML?</span>
+                    <span class="arrow" style="transition: transform 0.3s;">&#9662;</span>
+                </button>
+                <div class="accordion-content" style="max-height:0; overflow:hidden; transition:max-height 0.4s ease;">
+                    <p style="padding:1rem; border:1px solid var(--borderColor); border-radius:8px; margin-top:0.5rem;">
+                        HTML (HyperText Markup Language) is the standard markup language for creating web pages.
+                    </p>
+                </div>
+
+                <!-- Accordion 2 -->
+                <button class="accordion-btn" onclick="toggleAccordion(this)" style="width:100%; text-align:left; padding:1rem; border:none; outline:none; 
+            background:var(--primaryColor); color:#fff; cursor:pointer; border-radius:8px; 
+            margin-bottom:0.5rem; display:flex; justify-content:space-between; align-items:center;">
+                    <span>What is CSS?</span>
+                    <span class="arrow" style="transition: transform 0.3s;">&#9662;</span>
+                </button>
+                <div class="accordion-content" style="max-height:0; overflow:hidden; transition:max-height 0.4s ease;">
+                    <p style="padding:1rem; border:1px solid var(--borderColor); border-radius:8px; margin-top:0.5rem;">
+                        CSS (Cascading Style Sheets) is used to style and layout web pages.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <script>
+            function toggleAccordion(btn) {
+                const content = btn.nextElementSibling;
+                const arrow = btn.querySelector(".arrow");
+
+                if (content.style.maxHeight && content.style.maxHeight !== "0px") {
+                    content.style.maxHeight = "0";
+                    arrow.style.transform = "rotate(0deg)";
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    arrow.style.transform = "rotate(180deg)";
+                }
+            }
+        </script>
+
+
+        <section class="component-section">
+            <div style="display: flex; align-items: center; margin-bottom: 2rem;">
+                <h2 class="component-title">9. Search Bar</h2>
+                <span class="secondary-label">SECONDARY</span>
+            </div>
+            <p class="component-description">
+                A search bar allows users to quickly find specific information by typing keywords.
+            </p>
+
+            <div class="example-container" style="max-width:400px; margin:auto; display:flex; gap:0.5rem;">
+                <input type="text" placeholder="Search..." style="flex:1; padding:0.7rem 1rem; border:1px solid var(--borderColor); 
+                   border-radius:8px; font-size:1rem; outline:none;">
+
+                <button class="search-btn" style="background:var(--primaryColor); border:none; cursor:pointer; 
+                   padding:0.6rem; border-radius:50%; display:flex; 
+                   justify-content:center; align-items:center; transition:0.3s;">
+                    <span style="font-size:1.2rem; color:#fff;">🔍</span>
+                </button>
+            </div>
+        </section>
+
+
+
+        <section class="component-section">
+            <div style="display: flex; align-items: center; margin-bottom: 2rem;">
+                <h2 class="component-title">10. Progress Bar</h2>
+                <span class="secondary-label">SECONDARY</span>
+            </div>
+            <p class="component-description">
+                A progress bar visually shows the completion status of a task or process.
+            </p>
+
+            <div class="example-container" style="max-width:600px; margin:auto;">
+                <div style="background:#eee; border-radius:8px; overflow:hidden;">
+                    <div id="progressFill" style="width:40%; height:20px; background:var(--primaryColor);"></div>
+                </div>
+                <button onclick="increaseProgress()" style="margin-top:1rem; padding:0.6rem 1.2rem; 
+               background:var(--primaryColor); color:#fff; 
+               border:none; border-radius:8px; 
+               font-size:1rem; font-weight:500;
+               cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.15);
+               transition:all 0.3s ease;">
+                    Increase
+                </button>
+
+            </div>
+        </section>
+
+        <script>
+            function increaseProgress() {
+                const bar = document.getElementById("progressFill");
+                let width = parseInt(bar.style.width);
+                if (width < 100) {
+                    bar.style.width = (width + 10) + "%";
+                }
+            }
+        </script>
+
+
+        <section class="component-section">
+            <div style="display: flex; align-items: center; margin-bottom: 2rem;">
+                <h2 class="component-title">11. Modal / Popup</h2>
+                <span class="secondary-label">SECONDARY</span>
+            </div>
+            <p class="component-description">
+                A modal (popup) is used to show important information or prompt user actions
+                without navigating away from the page.
+            </p>
+
+            <div class="example-container" style="text-align:center;">
+                <!-- Styled open button -->
+                <button onclick="openModal()" style="padding:0.6rem 1.2rem; background:var(--primaryColor); color:#fff; 
+                       border:none; border-radius:8px; font-size:1rem; font-weight:500;
+                       cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.15);
+                       transition:all 0.3s ease;">
+                    Open Modal
+                </button>
+
+                <!-- Modal (hidden by default) -->
+                <div id="myModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
+                    background:rgba(0,0,0,0.5); align-items:center; justify-content:center;">
+                    <div style="background:#fff; padding:2rem; border-radius:12px; 
+                        max-width:400px; width:90%; text-align:center; 
+                        box-shadow:0 4px 12px rgba(0,0,0,0.25); animation:fadeIn 0.3s ease;">
+                        <h3 style="margin-bottom:1rem;">This is a Modal</h3>
+                        <p>Here you can display content, alerts, or forms.</p>
+
+                        <!-- Styled close button -->
+                        <button onclick="closeModal()" style="margin-top:1rem; padding:0.5rem 1rem; 
+                               background:#e74c3c; color:#fff; border:none; 
+                               border-radius:6px; font-size:0.95rem; font-weight:500;
+                               cursor:pointer; box-shadow:0 2px 5px rgba(0,0,0,0.15);
+                               transition:all 0.3s ease;">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script>
+            function openModal() {
+                document.getElementById("myModal").style.display = "flex";
+            }
+            function closeModal() {
+                document.getElementById("myModal").style.display = "none";
+            }
+        </script>
+
+
 
 
     </div>
